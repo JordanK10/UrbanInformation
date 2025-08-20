@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="A collaboration between a human and a large language model" />
+  <meta name="dcterms.date" content="2025-08-20" />
+  <title>A Bayesian Framework for Inferring Agent Learning in a Dynamic Urban Environment</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    div.abstract {
+      margin: 2em 2em 2em 2em;
+      text-align: left;
+      font-size: 85%;
+    }
+    div.abstract-title {
+      font-weight: bold;
+      text-align: center;
+      padding: 0;
+      margin-bottom: 0.5em;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">A Bayesian Framework for Inferring Agent Learning in a
+Dynamic Urban Environment</h1>
+<p class="author">A collaboration between a human and a large language
+model</p>
+<p class="date">2025-08-20</p>
+<div class="abstract">
+<div class="abstract-title">Abstract</div>
+<p>This document outlines a theoretical framework and corresponding
+Bayesian statistical model for analyzing the economic dynamics of urban
+neighborhoods. Grounded in information theory, we move beyond static
+measures by modeling local economies as agents learning to predict
+outcomes in a non-stationary environment. We introduce a novel method to
+first measure the city-wide, year-to-year predictability of the economic
+environment (<span class="math inline">\(p_t\)</span>) using a
+longitudinal frequentist approach. We then infer the latent learning
+dynamics of individual agents (U.S. Census block groups) as they adapt
+to this fluctuating environmental signal. The agent’s belief evolution
+is modeled as a noisy process of attraction to the previous year’s
+environmental state, governed by an interpretable learning rate. The
+resulting inferences provide a new, mechanism-based lens for studying
+urban inequality, reframing it as a problem of differential learning and
+adaptive capacity in response to a directly measured, dynamic
+environment.</p>
+</div>
+</header>
+<h1
+id="introduction-from-static-description-to-dynamic-inference">Introduction:
+From Static Description to Dynamic Inference</h1>
+<p>The study of urban inequality is often dominated by static snapshots.
+While essential, these descriptive statistics do not fully capture the
+<em>mechanisms</em> that generate and sustain inequality over time. The
+critical question is not just "which neighborhoods are poor?" but "how
+effectively do neighborhoods adapt their economic strategies in response
+to an ever-changing environment?"</p>
+<p>Drawing from a first-principles theory of growth from information
+(e.g., Kemp and Bettencourt), we re-frame this problem. We treat local
+economies as agents placing bets on economic outcomes based on
+predictive signals. Economic growth is a direct consequence of an
+agent’s ability to maintain a calibrated belief system about the
+environment’s true predictability. Our key innovation is to treat this
+environmental predictability not as a static unknown, but as a dynamic,
+measurable feature of the urban system.</p>
+<p>This document specifies a computational framework to first measure
+this dynamic signal and then infer the learning parameters of agents
+responding to it. We transform a simple time series of mean income into
+a rich set of parameters that characterize the adaptive capabilities of
+each local economy, providing a new foundation for understanding the
+drivers of urban inequality in a non-stationary world.</p>
+<h1 id="methodology-a-two-stage-model-of-a-dynamic-system">Methodology:
+A Two-Stage Model of a Dynamic System</h1>
+<p>Our methodology proceeds in two stages. First, we measure the
+macroscopic state of the environment for each year. Second, we use this
+measurement as an input to a Bayesian model that infers the microscopic
+learning dynamics of individual agents.</p>
+<h2 id="stage-1-measuring-the-dynamic-environment-p_t">Stage 1:
+Measuring the Dynamic Environment (<span
+class="math inline">\(p_t\)</span>)</h2>
+<p>We reject the assumption that the economic environment is static.
+Instead, we treat its predictability as a time-varying, city-wide
+quantity, <span class="math inline">\(p_t\)</span>. We justify its
+measurement with a "survivor bias" argument: the block groups in our
+dataset have persisted, suggesting they are not catastrophically
+miscalibrated. Therefore, an aggregate "win" (positive income growth)
+across the city is strong evidence of a favorable, predictable
+environment in that year.</p>
+<p>For each CBSA, for each year <span class="math inline">\(t\)</span>,
+we measure <span class="math inline">\(p_t\)</span> using a longitudinal
+frequentist calculation: <span class="math display">\[p_t =
+\frac{\text{Number of block groups in the CBSA with } y_t &gt;
+0}{\text{Total number of block groups in the CBSA}}\]</span> This
+calculation transforms <span class="math inline">\(p\)</span> from a
+latent parameter to be inferred into a dynamic, time-series dataset
+representing the macroscopic state of the urban economic
+environment.</p>
+<h2 id="stage-2-inferring-agent-learning">Stage 2: Inferring Agent
+Learning</h2>
+<h3 id="the-representative-agent-the-census-block-group">The
+Representative Agent: The Census Block Group</h3>
+<p>The "agent" in our model is a theoretical construct. To ground it
+empirically, we use the U.S. Census block group as its real-world
+analogue. A block group is the smallest geographical unit for which the
+Census Bureau publishes sample data, typically containing between 600
+and 3,000 people. This choice is deliberate and justified for several
+reasons:</p>
+<ul>
+<li><p><strong>Approximate Homogeneity:</strong> Block groups are
+designed to be relatively uniform in population and economic status,
+making them the closest available proxy to a coherent local
+system.</p></li>
+<li><p><strong>Emergent Properties:</strong> The variable we observe—the
+logarithmic change in mean household income—is an emergent property of
+the collective actions and interactions of all households within that
+small, geographically coherent area. The parameters we infer therefore
+represent the <em>net learning capacity of the block group as a
+system</em>.</p></li>
+<li><p><strong>Statistical Power:</strong> This unit of analysis
+provides tens of thousands of "agents" across U.S. cities, allowing for
+robust statistical analysis of the patterns in the inferred learning
+parameters.</p></li>
+</ul>
+<p>It is critical, however, to acknowledge the limitations of this
+approximation. The model is blind to inequality <em>within</em> a block
+group and treats the aggregate as if it were a single, rational agent,
+which is a necessary simplification of a more complex reality.</p>
+<h3
+id="the-evolution-of-belief-noisy-learning-towards-a-lagged-target">The
+Evolution of Belief: Noisy Learning Towards a Lagged Target</h3>
+<p>With the dynamic environmental state <span
+class="math inline">\(p_t\)</span> measured, we can now model the
+evolution of an agent’s internal belief, <span
+class="math inline">\(x_t\)</span>. We model the logit-transformed
+belief, <span class="math inline">\(z_t = \text{logit}(x_t)\)</span>, as
+a noisy process of attraction to the environment of the <em>previous
+year</em>. This introduces a plausible causal lag: the environment
+changes, agents observe and learn, and this new belief informs their
+actions in the current year.</p>
+<p>The agent’s belief at time <span class="math inline">\(t\)</span> is
+a random variable centered on a mean, <span
+class="math inline">\(\mathbb{E}[z_t]\)</span>, which is a weighted
+average of its prior belief and the lagged environmental state: <span
+class="math display">\[\mathbb{E}[z_t] = \frac{p_{t-1} \cdot (1 / (k
+\ell)) + z_{t-1}}{1 + 1 / (k \ell)}\]</span> The full evolution is then
+stochastic: <span class="math inline">\(z_t \sim
+\mathcal{N}(\mathbb{E}[z_t], \tau^2)\)</span>. This process is governed
+by two key inferred parameters for each agent:</p>
+<ul>
+<li><p><span class="math inline">\(k\)</span>: The intrinsic
+<strong>learning rate</strong>. A smaller <span
+class="math inline">\(k\)</span> implies faster adaptation, where the
+agent’s belief <span class="math inline">\(z_t\)</span> moves
+significantly towards the environmental state of the previous year,
+<span class="math inline">\(p_{t-1}\)</span>. This maintains the
+interpretable meaning from the original theory.</p></li>
+<li><p><span class="math inline">\(\tau\)</span>: The <strong>process
+noise</strong>, representing the intrinsic stochasticity or volatility
+of the agent’s learning process.</p></li>
+</ul>
+<h3 id="realizing-growth-the-log-income-growth-rate-gamma_t">Realizing
+Growth: The Log-Income Growth Rate (<span
+class="math inline">\(\gamma_t\)</span>)</h3>
+<p>The observed data, <span class="math inline">\(y_t\)</span>, is the
+realization of the growth rate <span
+class="math inline">\(\gamma_t\)</span>, which is a function of the
+<em>current</em> environmental state <span
+class="math inline">\(p_t\)</span> and the agent’s <em>current</em>
+belief <span class="math inline">\(x_t\)</span>. For the binary case
+(<span class="math inline">\(\ell=2\)</span>), this is: <span
+class="math display">\[\gamma(p_t, x_t) = \log(2) + p_t \log(x_t) +
+(1-p_t) \log(1-x_t)\]</span> Our statistical model implements this
+directly via a mixture likelihood where the weights are the measured,
+dynamic <span class="math inline">\(p_t\)</span> data. This creates a
+complete causal chain: <span class="math inline">\(p_{t-1}\)</span>
+informs <span class="math inline">\(z_t\)</span>, which determines <span
+class="math inline">\(x_t\)</span>, which interacts with the new <span
+class="math inline">\(p_t\)</span> to produce the observed outcome <span
+class="math inline">\(y_t\)</span>.</p>
+<h1 id="implications-and-further-research">Implications and Further
+Research</h1>
+<p>This revised framework, by separating the measurement of the
+environment from the inference of agent learning, provides a more robust
+and theoretically sound tool for studying urban economic dynamics. It
+allows us to ask new, more nuanced questions:</p>
+<ul>
+<li><p><strong>Learning vs. Environment:</strong> We can now more
+accurately decompose a neighborhood’s success or failure. Is a
+neighborhood struggling because the city-wide environment (<span
+class="math inline">\(p_t\)</span>) is poor, or because the neighborhood
+itself is a slow learner (high <span class="math inline">\(k\)</span>)
+and fails to adapt to the environmental signals?</p></li>
+<li><p><strong>Adaptive Heterogeneity:</strong> By analyzing the
+distribution of inferred learning rates (<span
+class="math inline">\(k\)</span>) across a city, we can quantify its
+"adaptive inequality." Do some cities have a uniformly fast-learning
+population, while others are characterized by a stark divide between
+rapid and slow adapters? This provides a new lens on the persistence of
+spatial inequality.</p></li>
+<li><p><strong>Predicting Shock Response:</strong> This model provides a
+foundation for exploring the dynamics of systemic shocks. By analyzing
+the time-series of <span class="math inline">\(p_t\)</span>, we can
+identify city-wide crisis years and then investigate the characteristics
+of agents (e.g., low vs. high <span class="math inline">\(k\)</span>)
+that successfully navigated these periods versus those that did
+not.</p></li>
+</ul>
+<p>This approach provides the tools to move from describing the symptoms
+of inequality to inferring the dynamic processes of learning and
+adaptation that are its root cause.</p>
+<h1
+id="conclusion-a-unified-framework-for-urban-economic-dynamics">Conclusion:
+A Unified Framework for Urban Economic Dynamics</h1>
+<p>This project represents the synthesis of economic theory, Bayesian
+statistical modeling, and large-scale data analysis into a single,
+cohesive pipeline for investigating the hidden drivers of urban
+prosperity and inequality. We began with a simple question: can we move
+beyond describing the static patterns of wealth in cities to infer the
+dynamic processes that create them? The framework presented here, which
+separates the measurement of the dynamic environment from the inference
+of agent learning, offers a robust answer.</p>
+<p>By treating census block groups as representative agents adapting to
+a measured, non-stationary information environment, we have constructed
+a powerful inferential tool. The journey from raw time-series data to a
+city-wide environmental signal (<span
+class="math inline">\(p_t\)</span>) and an agent-specific set of
+interpretable, dynamic parameters—learning rate (<span
+class="math inline">\(k\)</span>) and learning volatility (<span
+class="math inline">\(\tau\)</span>)—marks a significant step forward.
+It allows us to re-frame the conversation around urban inequality as a
+problem of differential capacities for learning and adaptation in a
+fluctuating world.</p>
+<p>The true utility of this approach lies in its multi-scale
+perspective. At the macro-level of the city, it provides a direct
+measure of the economic environment’s year-to-year predictability. At
+the micro-level of the neighborhood, it offers a diagnosis,
+distinguishing between communities that are struggling due to a volatile
+environment and those that are struggling because they are slow to
+learn.</p>
+<p>This work serves as both a conclusion and a foundation. It is the
+conclusion of a complex data analysis pipeline, but it is the foundation
+for a new program of research. The insights generated are not merely
+descriptive; they are prescriptive. They suggest that effective urban
+policy should focus not only on redistributing resources but also on
+strengthening the adaptive capacity of communities and enhancing the
+legibility and predictability of the urban economic environment itself.
+By providing a quantitative language to describe these abstract
+concepts, this framework opens the door to a more rigorous, targeted,
+and ultimately more effective science of cities.</p>
+</body>
+</html>
