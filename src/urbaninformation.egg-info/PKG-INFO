@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: urbaninformation
+Version: 0.1.0
+Summary: A Bayesian framework for inferring agent learning in a dynamic urban environment.
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: arviz
+Requires-Dist: pymc
+Requires-Dist: matplotlib
+Requires-Dist: tqdm
+Requires-Dist: joblib
+Requires-Dist: census
+Requires-Dist: mpi4py
+Provides-Extra: dev
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Dynamic: license-file
+
+# UrbanInformation
+Extracting information from US income ACS data in cities

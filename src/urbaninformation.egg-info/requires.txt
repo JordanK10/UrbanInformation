@@ -1,0 +1,13 @@
+numpy
+pandas
+arviz
+pymc
+matplotlib
+tqdm
+joblib
+census
+mpi4py
+
+[dev]
+ruff
+pytest
