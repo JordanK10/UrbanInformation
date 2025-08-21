@@ -1,7 +1,41 @@
 [project]
 name = "urbaninformation"
 version = "0.1.0"
-description = "Add your description here"
+description = "A Bayesian framework for inferring agent learning in a dynamic urban environment."
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "numpy",
+    "pandas",
+    "arviz",
+    "pymc",
+    "matplotlib",
+    "tqdm",
+    "joblib",
+    "census",
+    "mpi4py"
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pytest"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+# ==============================================================================
+# Tool Configurations
+# ==============================================================================
+
+[tool.setuptools.packages.find]
+# Tells setuptools to automatically find the package in the `src` directory
+where = ["src"]
+
+# --- Ruff Linter/Formatter Configuration ---
+# A good starting point for keeping the code clean.
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I"] # Standard lints + isort

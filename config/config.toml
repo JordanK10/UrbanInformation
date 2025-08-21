@@ -1,0 +1,24 @@
+# Main configuration for the Urban Information project
+
+[paths]
+# Directories for data I/O and results
+raw_data_dir = "data/raw"
+processed_data_dir = "data/processed"
+analysis_output_dir = "analysis_output_dynamic_p"
+plot_output_dir = "output_dynamic_p"
+
+# Specific file paths
+msa_fips = "data/processed/msa_fips_data.pkl"
+acs_data = "data/processed/cbsa_acs_data.pkl"
+summary_stats = "data/processed/cbsa_summary_statistics.pkl"
+
+[analysis]
+# Parameters for the core analysis run
+initial_year = 2014
+final_year = 2023
+model_method = "vi" # 'vi' for variational inference, 'mcmc' for sampling
+vi_steps = 30000
+
+[plotting]
+# Toggles for visualization scripts
+plot_individual_cbsa = true
