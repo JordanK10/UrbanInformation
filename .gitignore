@@ -2,3 +2,5 @@
 .env
 uv.lock
 .venv
+output/scratch/*
+!output/scratch/.gitkeep
