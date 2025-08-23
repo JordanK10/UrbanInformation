@@ -1,0 +1,21 @@
+agent_id,true_belief,fitted_belief,loss,status,has_trajectory_data
+0,0.6921209907911127,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.58081896)
+Coordinates:
+    x_dim_0  int64 8B 10",-1.9687117329177388,success,True
+1,0.7041818286789904,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.68959602)
+Coordinates:
+    x_dim_0  int64 8B 10",12.135522117088472,success,True
+2,0.7166160206589366,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.71947215)
+Coordinates:
+    x_dim_0  int64 8B 10",9.376088613877016,success,True
+3,0.6909838647494404,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.67305407)
+Coordinates:
+    x_dim_0  int64 8B 10",3.2709509410024324,success,True
+4,0.7187932261289152,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.66731565)
+Coordinates:
+    x_dim_0  int64 8B 10",2.8450586203698958,success,True

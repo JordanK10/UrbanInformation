@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+
+\title{A Bayesian Framework for Inferring Agent Learning in a Dynamic Urban Environment}
+\author{A collaboration between a human and a large language model}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+    This document outlines a theoretical framework and corresponding Bayesian statistical model for analyzing the economic dynamics of urban neighborhoods. Grounded in information theory, we move beyond static measures by modeling local economies as agents learning to predict outcomes in a non-stationary environment. We introduce a novel method to first measure the city-wide, year-to-year predictability of the economic environment ($p_t$) using a longitudinal frequentist approach. We then infer the latent learning dynamics of individual agents (U.S. Census block groups) as they adapt to this fluctuating environmental signal. The agent's belief evolution is modeled as a noisy process of attraction to the previous year's environmental state, governed by an interpretable learning rate. The resulting inferences provide a new, mechanism-based lens for studying urban inequality, reframing it as a problem of differential learning and adaptive capacity in response to a directly measured, dynamic environment.
+\end{abstract}
+
+\section{Introduction: From Static Description to Dynamic Inference}
+The study of urban inequality is often dominated by static snapshots. While essential, these descriptive statistics do not fully capture the \textit{mechanisms} that generate and sustain inequality over time. The critical question is not just "which neighborhoods are poor?" but "how effectively do neighborhoods adapt their economic strategies in response to an ever-changing environment?"
+
+Drawing from a first-principles theory of growth from information (e.g., Kemp and Bettencourt), we re-frame this problem. We treat local economies as agents placing bets on economic outcomes based on predictive signals. Economic growth is a direct consequence of an agent's ability to maintain a calibrated belief system about the environment's true predictability. Our key innovation is to treat this environmental predictability not as a static unknown, but as a dynamic, measurable feature of the urban system.
+
+This document specifies a computational framework to first measure this dynamic signal and then infer the learning parameters of agents responding to it. We transform a simple time series of mean income into a rich set of parameters that characterize the adaptive capabilities of each local economy, providing a new foundation for understanding the drivers of urban inequality in a non-stationary world.
+
+\section{Methodology: A Two-Stage Model of a Dynamic System}
+Our methodology proceeds in two stages. First, we measure the macroscopic state of the environment for each year. Second, we use this measurement as an input to a Bayesian model that infers the microscopic learning dynamics of individual agents.
+
+\subsection{Stage 1: Measuring the Dynamic Environment (\(p_t\))}
+We reject the assumption that the economic environment is static. Instead, we treat its predictability as a time-varying, city-wide quantity, \(p_t\). We justify its measurement with a "survivor bias" argument: the block groups in our dataset have persisted, suggesting they are not catastrophically miscalibrated. Therefore, an aggregate "win" (positive income growth) across the city is strong evidence of a favorable, predictable environment in that year.
+
+For each CBSA, for each year \(t\), we measure \(p_t\) using a longitudinal frequentist calculation:
+\begin{equation}
+    p_t = \frac{\text{Number of block groups in the CBSA with } y_t > 0}{\text{Total number of block groups in the CBSA}}
+\end{equation}
+This calculation transforms \(p\) from a latent parameter to be inferred into a dynamic, time-series dataset representing the macroscopic state of the urban economic environment.
+
+\subsection{Stage 2: Inferring Agent Learning}
+\subsubsection{The Representative Agent: The Census Block Group}
+The "agent" in our model is a theoretical construct. To ground it empirically, we use the U.S. Census block group as its real-world analogue. A block group is the smallest geographical unit for which the Census Bureau publishes sample data, typically containing between 600 and 3,000 people. This choice is deliberate and justified for several reasons:
+\begin{itemize}
+    \item \textbf{Approximate Homogeneity:} Block groups are designed to be relatively uniform in population and economic status, making them the closest available proxy to a coherent local system.
+    \item \textbf{Emergent Properties:} The variable we observe—the logarithmic change in mean household income—is an emergent property of the collective actions and interactions of all households within that small, geographically coherent area. The parameters we infer therefore represent the \textit{net learning capacity of the block group as a system}.
+    \item \textbf{Statistical Power:} This unit of analysis provides tens of thousands of "agents" across U.S. cities, allowing for robust statistical analysis of the patterns in the inferred learning parameters.
+\end{itemize}
+It is critical, however, to acknowledge the limitations of this approximation. The model is blind to inequality \textit{within} a block group and treats the aggregate as if it were a single, rational agent, which is a necessary simplification of a more complex reality.
+
+\subsubsection{The Evolution of Belief: Noisy Learning Towards a Lagged Target}
+With the dynamic environmental state \(p_t\) measured, we can now model the evolution of an agent's internal belief, \(x_t\). We model the logit-transformed belief, \(z_t = \text{logit}(x_t)\), as a noisy process of attraction to the environment of the \textit{previous year}. This introduces a plausible causal lag: the environment changes, agents observe and learn, and this new belief informs their actions in the current year.
+
+The agent's belief at time \(t\) is a random variable centered on a mean, \(\mathbb{E}[z_t]\), which is a weighted average of its prior belief and the lagged environmental state:
+\begin{equation}
+    \mathbb{E}[z_t] = \frac{p_{t-1} \cdot (1 / (k \ell)) + z_{t-1}}{1 + 1 / (k \ell)}
+\end{equation}
+The full evolution is then stochastic: \(z_t \sim \mathcal{N}(\mathbb{E}[z_t], \tau^2)\). This process is governed by two key inferred parameters for each agent:
+\begin{itemize}
+    \item \(k\): The intrinsic \textbf{learning rate}. A smaller \(k\) implies faster adaptation, where the agent's belief \(z_t\) moves significantly towards the environmental state of the previous year, \(p_{t-1}\). This maintains the interpretable meaning from the original theory.
+    \item \(\tau\): The \textbf{process noise}, representing the intrinsic stochasticity or volatility of the agent's learning process.
+\end{itemize}
+
+\subsubsection{Realizing Growth: The Log-Income Growth Rate (\(\gamma_t\))}
+The observed data, \(y_t\), is the realization of the growth rate \(\gamma_t\), which is a function of the \textit{current} environmental state \(p_t\) and the agent's \textit{current} belief \(x_t\). For the binary case (\(\ell=2\)), this is:
+\begin{equation}
+    \gamma(p_t, x_t) = \log(2) + p_t \log(x_t) + (1-p_t) \log(1-x_t)
+\end{equation}
+Our statistical model implements this directly via a mixture likelihood where the weights are the measured, dynamic \(p_t\) data. This creates a complete causal chain: \(p_{t-1}\) informs \(z_t\), which determines \(x_t\), which interacts with the new \(p_t\) to produce the observed outcome \(y_t\).
+
+\section{Implications and Further Research}
+This revised framework, by separating the measurement of the environment from the inference of agent learning, provides a more robust and theoretically sound tool for studying urban economic dynamics. It allows us to ask new, more nuanced questions:
+\begin{itemize}
+    \item \textbf{Learning vs. Environment:} We can now more accurately decompose a neighborhood's success or failure. Is a neighborhood struggling because the city-wide environment (\(p_t\)) is poor, or because the neighborhood itself is a slow learner (high \(k\)) and fails to adapt to the environmental signals?
+    \item \textbf{Adaptive Heterogeneity:} By analyzing the distribution of inferred learning rates (\(k\)) across a city, we can quantify its "adaptive inequality." Do some cities have a uniformly fast-learning population, while others are characterized by a stark divide between rapid and slow adapters? This provides a new lens on the persistence of spatial inequality.
+    \item \textbf{Predicting Shock Response:} This model provides a foundation for exploring the dynamics of systemic shocks. By analyzing the time-series of \(p_t\), we can identify city-wide crisis years and then investigate the characteristics of agents (e.g., low vs. high \(k\)) that successfully navigated these periods versus those that did not.
+\end{itemize}
+This approach provides the tools to move from describing the symptoms of inequality to inferring the dynamic processes of learning and adaptation that are its root cause.
+
+\section{Conclusion: A Unified Framework for Urban Economic Dynamics}
+This project represents the synthesis of economic theory, Bayesian statistical modeling, and large-scale data analysis into a single, cohesive pipeline for investigating the hidden drivers of urban prosperity and inequality. We began with a simple question: can we move beyond describing the static patterns of wealth in cities to infer the dynamic processes that create them? The framework presented here, which separates the measurement of the dynamic environment from the inference of agent learning, offers a robust answer.
+
+By treating census block groups as representative agents adapting to a measured, non-stationary information environment, we have constructed a powerful inferential tool. The journey from raw time-series data to a city-wide environmental signal ($p_t$) and an agent-specific set of interpretable, dynamic parameters---learning rate ($k$) and learning volatility ($\tau$)---marks a significant step forward. It allows us to re-frame the conversation around urban inequality as a problem of differential capacities for learning and adaptation in a fluctuating world.
+
+The true utility of this approach lies in its multi-scale perspective. At the macro-level of the city, it provides a direct measure of the economic environment's year-to-year predictability. At the micro-level of the neighborhood, it offers a diagnosis, distinguishing between communities that are struggling due to a volatile environment and those that are struggling because they are slow to learn.
+
+This work serves as both a conclusion and a foundation. It is the conclusion of a complex data analysis pipeline, but it is the foundation for a new program of research. The insights generated are not merely descriptive; they are prescriptive. They suggest that effective urban policy should focus not only on redistributing resources but also on strengthening the adaptive capacity of communities and enhancing the legibility and predictability of the urban economic environment itself. By providing a quantitative language to describe these abstract concepts, this framework opens the door to a more rigorous, targeted, and ultimately more effective science of cities.
+\end{document} 

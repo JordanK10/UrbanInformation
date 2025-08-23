@@ -1,0 +1,81 @@
+agent_id,true_belief,fitted_belief,loss,status,p_estimated,has_trajectory_data
+0,0.7036000221835158,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.67480558)
+Coordinates:
+    x_dim_0  int64 8B 10",11.262394502391487,success,0.7081818181818181,True
+1,0.7317267767710661,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.72046419)
+Coordinates:
+    x_dim_0  int64 8B 10",8.307973158166877,success,0.7081818181818181,True
+2,0.7023835902145606,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.70740203)
+Coordinates:
+    x_dim_0  int64 8B 10",5.898053236428314,success,0.7081818181818181,True
+3,0.7194368740752489,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.71498196)
+Coordinates:
+    x_dim_0  int64 8B 10",12.831588715756553,success,0.7081818181818181,True
+4,0.6858212006895772,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.66761555)
+Coordinates:
+    x_dim_0  int64 8B 10",11.459637583094379,success,0.7081818181818181,True
+5,0.6893852120873374,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.67634146)
+Coordinates:
+    x_dim_0  int64 8B 10",8.157692785378076,success,0.7081818181818181,True
+6,0.6825437608470031,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.65991427)
+Coordinates:
+    x_dim_0  int64 8B 10",10.615063023369583,success,0.7081818181818181,True
+7,0.7253344874386914,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.73403233)
+Coordinates:
+    x_dim_0  int64 8B 10",9.050637013028348,success,0.7081818181818181,True
+8,0.7020903028375088,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.69759024)
+Coordinates:
+    x_dim_0  int64 8B 10",8.039411712665233,success,0.7081818181818181,True
+9,0.7255940434832877,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.71907657)
+Coordinates:
+    x_dim_0  int64 8B 10",11.517413080978429,success,0.7081818181818181,True
+10,0.677931237771145,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.65697159)
+Coordinates:
+    x_dim_0  int64 8B 10",10.61670579459702,success,0.7081818181818181,True
+11,0.7275593039057701,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.71602739)
+Coordinates:
+    x_dim_0  int64 8B 10",12.761475286832205,success,0.7081818181818181,True
+12,0.7030390258861299,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.6895046)
+Coordinates:
+    x_dim_0  int64 8B 10",7.167598931949039,success,0.7081818181818181,True
+13,0.7073442723912674,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.69075667)
+Coordinates:
+    x_dim_0  int64 8B 10",6.413937286870896,success,0.7081818181818181,True
+14,0.6823725441075331,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.66079321)
+Coordinates:
+    x_dim_0  int64 8B 10",11.207223761982513,success,0.7081818181818181,True
+15,0.6952677037920529,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.68037937)
+Coordinates:
+    x_dim_0  int64 8B 10",9.609982823030606,success,0.7081818181818181,True
+16,0.7089450492440945,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.67686726)
+Coordinates:
+    x_dim_0  int64 8B 10",11.818311839864936,success,0.7081818181818181,True
+17,0.7334599320878384,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.70873999)
+Coordinates:
+    x_dim_0  int64 8B 10",9.348010170873238,success,0.7081818181818181,True
+18,0.6776395851509593,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.6700919)
+Coordinates:
+    x_dim_0  int64 8B 10",11.279015961041546,success,0.7081818181818181,True
+19,0.7312531855960979,"<xarray.DataArray 'x' ()> Size: 8B
+array(0.70958316)
+Coordinates:
+    x_dim_0  int64 8B 10",7.589093092268701,success,0.7081818181818181,True
